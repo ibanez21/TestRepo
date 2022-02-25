@@ -52,19 +52,19 @@ k=7; %number of months of past data used for solving coefficients
 l=2; %months shown on plot (how far into the future is predicted)
 %--------------------------------------------------------------------------
 %Importing data csv files
-rev1=csvread('/Users/jonk/test/python_diffeq/Data/net_income.csv',1,1).*10^9;     %Apple's net income
-SandP500=csvread('/Users/jonk/test/python_diffeq/Data/GSPC.csv',1,1);             %S&P 500
-cpi1=csvread('/Users/jonk/test/python_diffeq/Data/CPI2.csv',1,1);                 %Consumer Price Index
-inflation1=csvread('/Users/jonk/test/python_diffeq/Data/inf.csv',1,1).*0.01;      %inflation rate as decimal
-ir1=csvread('/Users/jonk/test/python_diffeq/Data/EFFR.csv',1,1).*0.01;            %Fed funds rate as as decimal
-gld1=csvread('/Users/jonk/test/python_diffeq/Data/GLD.csv',1,1);                  %SPDR Gold Trust
-rd1=csvread('/Users/jonk/test/python_diffeq/Data/RandD.csv',1,1).*10^9;           %Apple's R&D Spending
-pe1=csvread('/Users/jonk/test/python_diffeq/Data/pe_apple.csv',366,1);            %P/E ratio
-NASDAQ=csvread('/Users/jonk/test/python_diffeq/Data/NASDAQ100.csv',1,1);          %NASDAQ 100 index
-AAPL1=csvread('/Users/jonk/test/python_diffeq/Data/AAPL3.csv',1,1);               %Apple's Stock Price
-iphone1=csvread('/Users/jonk/test/python_diffeq/Data/iphone_rev.csv',1,1).*10^9 ; %iphone revenue
-conf1=csvread('/Users/jonk/test/python_diffeq/Data/cci_oecd.csv',1,1);            %Consumer Confidence Index
-buy1=csvread('/Users/jonk/test/python_diffeq/Data/buyback.csv',1,1).*10^9;        %buybacks
+rev1=csvread('net_income.csv',1,1).*10^9;     %Apple's net income
+SandP500=csvread('GSPC.csv',1,1);             %S&P 500
+cpi1=csvread('CPI2.csv',1,1);                 %Consumer Price Index
+inflation1=csvread('inf.csv',1,1).*0.01;      %inflation rate as decimal
+ir1=csvread('EFFR.csv',1,1).*0.01;            %Fed funds rate as as decimal
+gld1=csvread('GLD.csv',1,1);                  %SPDR Gold Trust
+rd1=csvread('RandD.csv',1,1).*10^9;           %Apple's R&D Spending
+pe1=csvread('pe_apple.csv',366,1);            %P/E ratio
+NASDAQ=csvread('NASDAQ100.csv',1,1);          %NASDAQ 100 index
+AAPL1=csvread('AAPL3.csv',1,1);               %Apple's Stock Price
+iphone1=csvread('iphone_rev.csv',1,1).*10^9 ; %iphone revenue
+conf1=csvread('cci_oecd.csv',1,1);            %Consumer Confidence Index
+buy1=csvread('buyback.csv',1,1).*10^9;        %buybacks
 
 %Local Volatility results imported here
 %sigma=csvread('sigma6_29-7_6.csv',0,1);   
@@ -173,21 +173,21 @@ buyback=buyback(1:mo(end));
 
 %Complete the same process with the older data files
 %--------------------------------------------------------------------------
-rev_old=csvread('/Users/jonk/test/python_diffeq/Data/old_netincome.csv',1,1).*10^6;   %Apple's Net Income
-sp500_old=csvread('/Users/jonk/test/python_diffeq/Data/old_SP500.csv',1,1);           %S&P 500
-cpi_old=csvread('/Users/jonk/test/python_diffeq/Data/old_cpi.csv',1,1);               %Consumer Price Index
-inf_old=csvread('/Users/jonk/test/python_diffeq/Data/old_inf.csv',1,1).*0.01;         %inflation as decimal
-ir_old=csvread('/Users/jonk/test/python_diffeq/Data/old_ir.csv',1,1).*0.01;           %Fed funds as decimal
-gld_old=csvread('/Users/jonk/test/python_diffeq/Data/old_gld.csv',1,1);               %GLD
-rd_old=csvread('/Users/jonk/test/python_diffeq/Data/old_rd.csv',1,1).*10^6;           %Apple's R&D Spending
-nas_old=csvread('/Users/jonk/test/python_diffeq/Data/old_nasdaq.csv',1,1);            %NASDAQ 100 Index
-AAPL_old=csvread('/Users/jonk/test/python_diffeq/Data/old_apple.csv',1,1);            %Apple's Stock Price
-iphone_old=csvread('/Users/jonk/test/python_diffeq/Data/old_iphone.csv',1,1).*10^6 ;  %iPhone Revenue
-conf_old=csvread('/Users/jonk/test/python_diffeq/Data/old_cci.csv',1,1);              %CCI
+rev_old=csvread('old_netincome.csv',1,1).*10^6;   %Apple's Net Income
+sp500_old=csvread('old_SP500.csv',1,1);           %S&P 500
+cpi_old=csvread('old_cpi.csv',1,1);               %Consumer Price Index
+inf_old=csvread('old_inf.csv',1,1).*0.01;         %inflation as decimal
+ir_old=csvread('old_ir.csv',1,1).*0.01;           %Fed funds as decimal
+gld_old=csvread('old_gld.csv',1,1);               %GLD
+rd_old=csvread('old_rd.csv',1,1).*10^6;           %Apple's R&D Spending
+nas_old=csvread('old_nasdaq.csv',1,1);            %NASDAQ 100 Index
+AAPL_old=csvread('old_apple.csv',1,1);            %Apple's Stock Price
+iphone_old=csvread('old_iphone.csv',1,1).*10^6 ;  %iPhone Revenue
+conf_old=csvread('old_cci.csv',1,1);              %CCI
 buyback_old=zeros(mo1(end),1);                    %Apple didn't have any  
                                                   %buybacks prior to 2008
                                                   %so this variable is 0
-eps_old=csvread('/Users/jonk/test/python_diffeq/Data/old_eps.csv',1,1);               %Apple's EPS
+eps_old=csvread('old_eps.csv',1,1);               %Apple's EPS
 
 %------- Linearly Interpolate the Old Data--------------------------------
 

@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from scipy.integrate import odeint
-import pdb
 
 look_back_window = 7
 
@@ -25,7 +24,7 @@ macro_vars = [ffr,bb,cci,iphone,gld,aapl,rd,nas,pe,cpi,inf,sandp,net_inc]
 
 ### DATA PREPROCESSING AND CLEANING
 
-# Apple stock price data needs unique cleaning
+# Apple stock price data needs unique pre-processing
 
 aapl.at[1,'Open'] = 28.5
 aapl = aapl[1:]
@@ -209,11 +208,11 @@ var_pairs = [(cpi_coeff,cpi_diff),(inf_coeff, inf_diff),(pe_coeff,pe_diff),(ffr_
              (gld_coeff,gld_diff),(sandp_coeff,sandp_diff),(iphone_coeff,iphone_diff),(cci_coeff,cci_diff),
              (bb_coeff,bb_diff)]
 for pair in var_pairs:
-    coeffs = np.matrix.flatten(np.linalg.lstsq(pair[0].transpose(),pair[1],rcond=None)[0])
+    coeffs = np.linalg.lstsq(pair[0].transpose(),pair[1],rcond=None)[0]
     for coefficients in coeffs:
         c.append(coefficients)
 
-
+print(len(c))
 ### END SOLVE FOR COEFFICIENTS
 
 #--------------------------------------------------------------------------------------------------
@@ -228,7 +227,7 @@ init_conds = [cpi['CPI'][look_back_window*30], inf['Inflation'][look_back_window
 def model(x,t):
     dxdt = np.zeros(13)
     dxdt[0] = c[0]*x[1]*x[0]
-    dxdt[1] = c[1]*x[0] + c[2]*x[3] + c[3]*x[1]
+    dxdt[1] = c[1]*dxdt[1] + c[2]*x[1] + c[3]*x[1]
     dxdt[2] = c[4]*x[1] + c[5]*x[5] + c[6]*x[7] + c[7]*x[12]
     dxdt[3] = c[8]*dxdt[0] + c[9]*x[3] + c[10]*x[1]*x[3] +c[11]*x[3]*x[7]
     dxdt[4] = c[12]*x[7] + c[13]*x[9] + c[14]*x[3] + c[15]*x[11]
